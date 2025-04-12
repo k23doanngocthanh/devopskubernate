@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: n8n.devhub.io.vn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: n8n-service
+                port:
+                  number: 80
+    - host: airflow.devhub.io.vn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: airflow-service
+                port:
+                  number: 80
+    # - host: otherservice.devhub.io.vn
+    #   http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: other-service-service
+    #             port:
+    #               number: 80
