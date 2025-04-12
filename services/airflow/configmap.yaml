@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: airflow-config
-  namespace: default
-data:
-  # Add your Airflow configuration here.

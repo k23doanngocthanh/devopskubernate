@@ -25,20 +25,7 @@ jobs:
         mkdir -p ~/.kube
         echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
 
-    - name: Validate resources
-      run: |
-        find ingress/ services/ -type f -name "*.yaml" | while read file; do
-          echo "Validating $file"
-          kubectl apply --dry-run=client -f "$file"
-        done
-
-    - name: Deploy Ingress
+    - name: Deploy application to Kubernetes
       run: |
         kubectl apply -f ingress/
-
-    - name: Deploy services
-      run: |
-        find services/ -type f -name "*.yaml" | while read file; do
-          echo "$(date): Applying $file"
-          kubectl apply -f "$file" || echo "Failed to apply $file"
-        done
+        kubectl apply -f services/n8n/
