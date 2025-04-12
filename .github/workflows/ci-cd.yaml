@@ -3,7 +3,7 @@ name: Deploy to Kubernetes
 on:
   push:
     branches:
-      - main
+      - main  # Kích hoạt khi có thay đổi trên nhánh main
 
 jobs:
   deploy:
@@ -25,7 +25,13 @@ jobs:
         mkdir -p ~/.kube
         echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
 
-    - name: Deploy application to Kubernetes
+    - name: Deploy Ingress
       run: |
         kubectl apply -f ingress/
-        find services/ -type f -name "*.yaml" -print0 | xargs -0 kubectl apply -f
+
+    - name: Deploy services
+      run: |
+        find services/ -type f -name "*.yaml" | while read file; do
+          echo "Applying $file"
+          kubectl apply -f "$file"
+        done
