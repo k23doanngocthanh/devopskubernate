@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: n8n-deployment
-  namespace: n8n
+  namespace: default
   labels: &labels
     app: n8n
     component: deployment

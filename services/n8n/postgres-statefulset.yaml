@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres-statefulset
-  namespace: n8n
+  namespace: default
   labels: &labels
     app: postgres
     component: statefulset
