@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: n8n-deployment
+  namespace: default
 spec:
   replicas: 1
   selector:
@@ -19,8 +20,8 @@ spec:
             - containerPort: 5678
           env:
             - name: N8N_HOST
-              value: "n8n.devhub.io.vn"
+              value: n8n.devhub.io.vn
             - name: N8N_PORT
               value: "5678"
             - name: NODE_ENV
-              value: "production"
+              value: production

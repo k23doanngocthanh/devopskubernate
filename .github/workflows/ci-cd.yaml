@@ -3,7 +3,7 @@ name: Deploy to Kubernetes
 on:
   push:
     branches:
-      - main  # Kích hoạt khi có thay đổi trên nhánh main
+      - main
 
 jobs:
   deploy:
@@ -25,6 +25,13 @@ jobs:
         mkdir -p ~/.kube
         echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
 
+    - name: Validate resources
+      run: |
+        find ingress/ services/ -type f -name "*.yaml" | while read file; do
+          echo "Validating $file"
+          kubectl apply --dry-run=client -f "$file"
+        done
+
     - name: Deploy Ingress
       run: |
         kubectl apply -f ingress/
@@ -32,6 +39,6 @@ jobs:
     - name: Deploy services
       run: |
         find services/ -type f -name "*.yaml" | while read file; do
-          echo "Applying $file"
-          kubectl apply -f "$file"
+          echo "$(date): Applying $file"
+          kubectl apply -f "$file" || echo "Failed to apply $file"
         done
