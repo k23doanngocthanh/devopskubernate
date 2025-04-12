@@ -28,4 +28,4 @@ jobs:
     - name: Deploy application to Kubernetes
       run: |
         kubectl apply -f ingress/
-        kubectl apply -f services/
+        find services/ -type f -name "*.yaml" -print0 | xargs -0 kubectl apply -f
