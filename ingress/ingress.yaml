@@ -1,8 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
   name: main-ingress
 spec:
+  tls:
+  - hosts:
+    - n8n.devhub.io.vn
+    secretName: n8n-tls
   ingressClassName: nginx
   rules:
     - host: n8n.devhub.io.vn
