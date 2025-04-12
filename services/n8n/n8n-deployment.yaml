@@ -34,14 +34,6 @@ spec:
             name: n8n-configmap
         - secretRef:
             name: n8n-secrets
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5678
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 5678
         resources:
           limits:
             cpu: "1.0"
