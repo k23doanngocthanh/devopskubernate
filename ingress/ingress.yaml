@@ -13,5 +13,15 @@ spec:
             backend:
               service:
                 name: n8n-service
-                port:
+                port: 
                   number: 80
+    - host: registry.devhub.io.vn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: registry-service
+                port:
+                  number: 5000
