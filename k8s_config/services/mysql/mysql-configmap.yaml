@@ -5,11 +5,7 @@ metadata:
   name: mysql-configmap
   namespace: default
 data:
-  MYSQL_ROOT_PASSWORD: "password"
   MYSQL_USER: "mautic"
-  MYSQL_PASSWORD: "password"
   MYSQL_DATABASE: "mautic"
   MAUTIC_DB_HOST: "mysql"
   MAUTIC_DB_NAME: "mautic"
-  MAUTIC_DB_USER: "mautic"
-  MAUTIC_DB_PASSWORD: "password"
