@@ -5,7 +5,11 @@ metadata:
   name: mysql-configmap
   namespace: default
 data:
-  MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-  MYSQL_USER: ${{ secrets.MYSQL_USER }}
-  MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-  MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+  MYSQL_ROOT_PASSWORD: "password"
+  MYSQL_USER: "mautic"
+  MYSQL_PASSWORD: "password"
+  MYSQL_DATABASE: "mautic"
+  MAUTIC_DB_HOST: "mysql"
+  MAUTIC_DB_NAME: "mautic"
+  MAUTIC_DB_USER: "mautic"
+  MAUTIC_DB_PASSWORD: "password"

@@ -31,6 +31,16 @@ spec:
                 name: phpmyadmin-service
                 port:
                   number: 80
+    - host: mautic.devhub.io.vn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mautic-service
+                port:
+                  number: 80
     - host: mysql.devhub.io.vn
       http:
         paths:
