@@ -4,7 +4,7 @@ metadata:
   name: app-configmap
   namespace: default
 data:
-  MYSQL_USER: $MYSQL_USER
-  MYSQL_DATABASE: $MYSQL_DATABASE
-  MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-  MYSQL_PASSWORD: $MYSQL_PASSWORD
+  MYSQL_USER: newuser
+  MYSQL_DATABASE: newdb
+  MYSQL_PASSWORD: newpass
+  MYSQL_HOST: mysql-service
