@@ -7,3 +7,4 @@ metadata:
 data:
   MYSQL_USER: "newuser"
   MYSQL_DATABASE: "newdb"
+  MYSQL_ROOT_HOST: "%"
