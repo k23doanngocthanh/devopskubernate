@@ -5,5 +5,5 @@ metadata:
   name: mysql-configmap
   namespace: default
 data:
-  MYSQL_USER: ${{ secrets.MYSQL_USER }}
-  MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+  MYSQL_USER: "newuser"
+  MYSQL_DATABASE: "newdb"
