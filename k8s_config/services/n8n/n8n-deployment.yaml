@@ -16,6 +16,10 @@ spec:
       containers:
         - name: n8n
           image: n8nio/n8n
+          env:
+            - name: N8N_RUNNERS_ENABLED
+              value: "true"
+          
           ports:
             - containerPort: 5678
           volumeMounts:

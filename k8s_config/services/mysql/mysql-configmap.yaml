@@ -5,7 +5,5 @@ metadata:
   name: mysql-configmap
   namespace: default
 data:
-  MYSQL_USER: "mautic"
-  MYSQL_DATABASE: "mautic"
-  MAUTIC_DB_HOST: "mysql"
-  MAUTIC_DB_NAME: "mautic"
+  MYSQL_USER: ${{ secrets.MYSQL_USER }}
+  MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
