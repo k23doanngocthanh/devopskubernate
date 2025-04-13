@@ -16,16 +16,15 @@ spec:
       - name: mautic
         image: docker.io/mautic/mautic
         ports:
-        - containerPort: 80
+          - containerPort: 80
         env:
-        - name: MAUTIC_DB_HOST
-          value: mysql
-        - name: MAUTIC_DB_NAME
-          value: mautic
-        - name: MAUTIC_DB_USER
-          value: root
-        - name: MAUTIC_DB_PASSWORD
-          value: password
+          - name: MAUTIC_DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: mysql-configmap
+                key: MAUTIC_DB_HOST
+          - name: MAUTIC_DB_PASSWORD
+            valueFrom: { configMapKeyRef: { name: mysql-configmap, key: MAUTIC_DB_PASSWORD } }
         volumeMounts:
         - mountPath: /var/www/html/media
           name: mautic-storage
