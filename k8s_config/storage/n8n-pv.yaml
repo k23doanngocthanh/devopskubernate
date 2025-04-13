@@ -8,3 +8,6 @@ spec:
   volumeMode: Filesystem
   accessModes:    
     - ReadWriteOnce
+  hostPath:
+    path: /mnt/data/n8n
+    type: DirectoryOrCreate

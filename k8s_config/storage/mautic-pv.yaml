@@ -8,3 +8,6 @@ spec:
   capacity:
     storage: 5Gi  
   storageClassName: standard
+  hostPath:
+    path: /mnt/data/mautic
+    type: DirectoryOrCreate
