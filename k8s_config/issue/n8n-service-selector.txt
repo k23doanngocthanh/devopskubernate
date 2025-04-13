@@ -1,0 +1,10 @@
+Issue: n8n is not working, the error is 503.
+
+Description:
+The n8n application was not accessible, and attempting to access it resulted in a 503 Service Temporarily Unavailable error.
+
+Root Cause:
+The root cause of the issue was an incorrect selector configuration in the n8n service. The service was configured to look for pods with labels `app: n8n` and `component: deployment`. However, the n8n deployment only had the label `app: n8n`. This mismatch meant the service could not find any matching pods, and therefore, it could not direct traffic to the n8n application.
+
+Solution:
+The issue was resolved by correcting the n8n service selector to only search for pods with the label `app: n8n`. This change allowed the service to properly identify and connect to the n8n pods.

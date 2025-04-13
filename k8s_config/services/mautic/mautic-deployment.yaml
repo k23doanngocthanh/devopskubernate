@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: mautic
-        image: docker.io/mautic/mautic
+        image: docker.io/mautic/mautic:latest
         ports:
           - containerPort: 80
         envFrom:
