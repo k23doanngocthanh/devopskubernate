@@ -18,11 +18,9 @@ spec:
         image: mysql:8.0
         ports:
           - containerPort: 3306
-        envFrom:
+        envFrom:          
           - configMapRef:
-              name: mysql-configmap
-          - secretRef:
-              name: mysql-secrets
+              name: mysql-configmap        
         volumeMounts:
         - name: mysql-data
           mountPath: /var/lib/mysql
