@@ -30,6 +30,27 @@ jobs:
         mkdir -p ~/.kube
         echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
 
+    - name: Check secrets
+      run: |
+        if [ -z "$MYSQL_USER" ]; then
+          echo "Error: MYSQL_USER is empty or null"
+          exit 1
+        fi
+        if [ -z "$MYSQL_DATABASE" ]; then
+          echo "Error: MYSQL_DATABASE is empty or null"
+          exit 1
+        fi
+        if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
+          echo "Error: MYSQL_ROOT_PASSWORD is empty or null"
+          exit 1
+        fi
+        if [ -z "$MYSQL_PASSWORD" ]; then
+          echo "Error: MYSQL_PASSWORD is empty or null"
+          exit 1
+        fi
+    - name: Apply app configmap
+      run: |
+        kubectl apply -f k8s_config/app-configmap.yaml -n default
     - name: Deploy application to Kubernetes
       run: |
           kubectl apply -f k8s_config/storage/
