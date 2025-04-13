@@ -35,3 +35,4 @@ jobs:
           kubectl apply -f k8s_config/services/phpmyadmin/
           kubectl apply -f k8s_config/services/mautic/
           kubectl apply -f k8s_config/ingress/
+          kubectl apply -f k8s_config/metallb/l2advertisement.yaml
