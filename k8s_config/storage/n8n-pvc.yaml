@@ -1,14 +1,11 @@
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 metadata:
-  name: n8n-pv
+  name: n8n-pvc
 spec:
-  capacity:
-    storage: 50Gi
   accessModes:
     - ReadWriteOnce
-  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 50Gi
   storageClassName: standard
-  hostPath:
-    path: /mnt/data/n8n
-    type: DirectoryOrCreate
