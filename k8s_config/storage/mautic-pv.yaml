@@ -3,10 +3,10 @@ kind: PersistentVolume
 metadata:
   name: mautic-pv
 spec:
+  capacity:
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
-  capacity:
-    storage: 5Gi  
   storageClassName: standard
   hostPath:
     path: /mnt/data/mautic

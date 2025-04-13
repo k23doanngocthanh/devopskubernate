@@ -9,4 +9,3 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: standard
-  # volumeName: mautic-pv  # Nếu bạn đã có một PersistentVolume (PV) tên là mautic-pv
