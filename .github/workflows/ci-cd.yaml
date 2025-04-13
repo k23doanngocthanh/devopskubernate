@@ -13,7 +13,6 @@ jobs:
       MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
       MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
       MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
     steps:
     - name: Checkout repository
@@ -23,25 +22,13 @@ jobs:
       uses: azure/setup-kubectl@v3
       with:
         version: 'latest'
-        
-    - name: Validate Secrets
-      run: |
-          #!/bin/bash
-          REQUIRED_SECRETS=("MYSQL_USER" "MYSQL_DATABASE" "MYSQL_ROOT_PASSWORD" "MYSQL_PASSWORD")
 
-          for SECRET in "${REQUIRED_SECRETS[@]}"; do
-            if [ -z "${!SECRET}" ]; then
-              echo "::error file=deploy.yml::Missing required secret: $SECRET"
-              exit 1
-            fi
-          done
-
-          echo "::notice::All required secrets are set."
-
-    - name: Configure Kubeconfig
+    - name: Set up Kubeconfig
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
       run: |
         mkdir -p ~/.kube
-        echo "$KUBECONFIG" > ~/.kube/config
+        echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
 
     - name: Deploy application to Kubernetes
       run: |
