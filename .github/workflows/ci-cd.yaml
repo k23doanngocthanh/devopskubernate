@@ -27,8 +27,10 @@ jobs:
 
     - name: Deploy application to Kubernetes
       run: |
-          kubectl apply -f storage/
-          kubectl apply -f services/clusterissuer/
-          kubectl apply -f services/registry/
-          kubectl apply -f services/n8n/
-          kubectl apply -f ingress/
+          kubectl apply -f k8s_config/storage/
+          kubectl apply -f k8s_config/services/clusterissuer/
+          kubectl apply -f k8s_config/services/registry/
+          kubectl apply -f k8s_config/services/n8n/
+          kubectl apply -f k8s_config/services/mysql/
+          kubectl apply -f k8s_config/services/phpmyadmin/
+          kubectl apply -f k8s_config/ingress/

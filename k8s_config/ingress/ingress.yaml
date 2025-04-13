@@ -21,6 +21,26 @@ spec:
                 name: n8n-service
                 port: 
                   number: 80
+    - host: phpmyadmin.devhub.io.vn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phpmyadmin-service
+                port:
+                  number: 80
+    - host: mysql.devhub.io.vn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mysql-service
+                port:
+                  number: 3306
     - host: registry.devhub.io.vn
       http:
         paths:
