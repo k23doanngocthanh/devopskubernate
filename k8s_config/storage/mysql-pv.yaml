@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   capacity:
-    storage: 1Gi
+    storage: 15Gi
   accessModes:
     - ReadWriteOnce
   storageClassName: standard
