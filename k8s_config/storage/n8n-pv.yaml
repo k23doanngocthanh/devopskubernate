@@ -6,7 +6,5 @@ spec:
   capacity:
     storage: 50Gi
   volumeMode: Filesystem
-  accessModes:
+  accessModes:    
     - ReadWriteOnce
-  hostPath:
-    path: /data/n8n

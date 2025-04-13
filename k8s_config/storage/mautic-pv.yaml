@@ -6,15 +6,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 5Gi
-  local:
-    path: /mnt/data/mautic
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - your-node-name 
+    storage: 5Gi  
+  storageClassName: standard
   storageClassName: standard

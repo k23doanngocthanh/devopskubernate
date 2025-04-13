@@ -6,7 +6,5 @@ spec:
   capacity:
     storage: 15Gi
   volumeMode: Filesystem
-  accessModes:
+  accessModes:    
     - ReadWriteOnce
-  hostPath:
-    path: /data/postgres
