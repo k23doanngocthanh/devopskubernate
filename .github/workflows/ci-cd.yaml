@@ -24,32 +24,19 @@ jobs:
       with:
         version: 'latest'
         
-    - name: Check Secrets
+    - name: Validate Secrets
       run: |
         #!/bin/bash
-        if [ -z "$MYSQL_USER" ]; then
-          echo "Error: MYSQL_USER is empty or null"
-          exit 1
-        fi
-        if [ -z "$MYSQL_DATABASE" ]; then
-          echo "Error: MYSQL_DATABASE is empty or null"
-          exit 1
-        fi
-        if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
-          echo "Error: MYSQL_ROOT_PASSWORD is empty or null"
-          exit 1
-        fi
-        if [ -z "$MYSQL_PASSWORD" ]; then
-          echo "Error: MYSQL_PASSWORD is empty or null"
-          exit 1
-        fi
-        if [ -z "$KUBECONFIG" ]; then
-          echo "Error: KUBECONFIG is empty or null"
-          exit 1
-        fi
-        echo "All secrets are present and have values."
+        REQUIRED_SECRETS=("MYSQL_USER" "MYSQL_DATABASE" "MYSQL_ROOT_PASSWORD" "MYSQL_PASSWORD" "KUBECONFIG")
+        for SECRET in "${REQUIRED_SECRETS[@]}"; do
+          if [ -z "${!SECRET}" ]; then
+            echo "::error file=deploy.yml::Missing required secret: $SECRET"
+            exit 1
+          fi
+        done
+        echo "::notice::All required secrets are set."
 
-    - name: Set up Kubeconfig
+    - name: Configure Kubeconfig
       run: |
         mkdir -p ~/.kube
         echo "$KUBECONFIG" > ~/.kube/config
