@@ -26,15 +26,17 @@ jobs:
         
     - name: Validate Secrets
       run: |
-        #!/bin/bash
-        REQUIRED_SECRETS=("MYSQL_USER" "MYSQL_DATABASE" "MYSQL_ROOT_PASSWORD" "MYSQL_PASSWORD" "KUBECONFIG")
-        for SECRET in "${REQUIRED_SECRETS[@]}"; do
-          if [ -z "${!SECRET}" ]; then
-            echo "::error file=deploy.yml::Missing required secret: $SECRET"
-            exit 1
-          fi
-        done
-        echo "::notice::All required secrets are set."
+          #!/bin/bash
+          REQUIRED_SECRETS=("MYSQL_USER" "MYSQL_DATABASE" "MYSQL_ROOT_PASSWORD" "MYSQL_PASSWORD")
+
+          for SECRET in "${REQUIRED_SECRETS[@]}"; do
+            if [ -z "${!SECRET}" ]; then
+              echo "::error file=deploy.yml::Missing required secret: $SECRET"
+              exit 1
+            fi
+          done
+
+          echo "::notice::All required secrets are set."
 
     - name: Configure Kubeconfig
       run: |
