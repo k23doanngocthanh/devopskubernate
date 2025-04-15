@@ -61,7 +61,7 @@ jobs:
             kubectl apply -f k8s_config/services/$service/ -n default || echo "Failed to apply $service config";
             kubectl rollout restart deployment/$service -n default || echo "$service restart failed";
           }
-        }
+        done
 
     - name: Apply app configmap
       run: |
