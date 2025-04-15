@@ -57,9 +57,25 @@ jobs:
           kubectl logs -n default deployment/$service --tail=50 || {
             echo "$service is failing, checking logs and deleting resources...";
             kubectl logs -n default deployment/$service --tail=100;
-            kubectl delete deployment $service -n default || echo "$service delete failed";
-            kubectl apply -f k8s_config/services/$service/ -n default || echo "Failed to apply $service config";
-            kubectl rollout restart deployment/$service -n default || echo "$service restart failed";
+            
+            # Delete and recreate MySQL deployment if necessary
+            if [ "$service" == "mysql-deployment" ]; then
+              kubectl delete pvc -n default -l app=mysql || echo "MySQL PVC delete failed";
+              kubectl delete pv -n default -l app=mysql || echo "MySQL PV delete failed";
+              kubectl delete deployment $service -n default || echo "$service delete failed";
+              kubectl apply -f k8s_config/services/mysql/ -n default || echo "Failed to apply $service config";
+              kubectl rollout restart deployment/$service -n default || echo "$service restart failed";
+            # Delete and recreate n8n deployment if necessary
+            elif [ "$service" == "n8n-deployment" ]; then
+              kubectl delete deployment $service -n default || echo "$service delete failed";
+              kubectl apply -f k8s_config/services/n8n/ -n default || echo "Failed to apply $service config";
+              kubectl rollout restart deployment/$service -n default || echo "$service restart failed";
+            else
+              # For registry and other services
+              kubectl delete deployment $service -n default || echo "$service delete failed";
+              kubectl apply -f k8s_config/services/$service/ -n default || echo "Failed to apply $service config";
+              kubectl rollout restart deployment/$service -n default || echo "$service restart failed";
+            fi
           }
         done
 
