@@ -49,6 +49,19 @@ jobs:
           exit 1
         fi
 
+    - name: Check service logs before deploy
+      run: |
+        # Check logs for specific services (e.g., mysql, n8n)
+        kubectl logs -n default deployment/mysql-deployment --tail=50 || echo "No logs for mysql-deployment found."
+        kubectl logs -n default deployment/n8n-deployment --tail=50 || echo "No logs for n8n-deployment found."
+        kubectl logs -n default deployment/registry-deployment --tail=50 || echo "No logs for registry-deployment found."
+
+    - name: Delete Persistent Volumes (PVs) and Persistent Volume Claims (PVCs)
+      run: |
+        # Delete PVs and PVCs to ensure a fresh start
+        kubectl delete pv --all -n default || echo "No PVs to delete."
+        kubectl delete pvc --all -n default || echo "No PVCs to delete."
+
     - name: Apply app configmap
       run: |
         kubectl apply -f k8s_config/app-configmap.yaml -n default
