@@ -48,19 +48,22 @@ jobs:
           echo "Error: MYSQL_PASSWORD is empty or null"
           exit 1
         fi
+
     - name: Apply app configmap
       run: |
         kubectl apply -f k8s_config/app-configmap.yaml -n default
+
     - name: Deploy application to Kubernetes
       run: |
-          kubectl apply -f k8s_config/app-configmap.yaml -n default
-          kubectl apply -f k8s_config/storage/ -n default
-          kubectl apply -f k8s_config/services/clusterissuer/ -n default
-          kubectl apply -f k8s_config/services/registry/ -n default
-          kubectl apply -f k8s_config/services/n8n/ -n default
-          kubectl apply -f k8s_config/services/mysql/ -n default
-          kubectl apply -f k8s_config/services/phpmyadmin/ -n default
-          kubectl apply -f k8s_config/ingress/ -n default
-          kubectl apply -f k8s_config/metallb/l2advertisement.yaml
-          kubectl rollout restart deployment --all -n default
+        kubectl apply -f k8s_config/storage/ -n default
+        kubectl apply -f k8s_config/services/clusterissuer/ -n default
+        kubectl apply -f k8s_config/services/registry/ -n default
+        kubectl apply -f k8s_config/services/n8n/ -n default
+        kubectl apply -f k8s_config/services/mysql/ -n default
+        kubectl apply -f k8s_config/services/phpmyadmin/ -n default
+        kubectl apply -f k8s_config/ingress/ -n default
+        kubectl apply -f k8s_config/metallb/l2advertisement.yaml
 
+    - name: Restart all deployments in default namespace
+      run: |
+        kubectl get deployments -n default -o name | xargs kubectl rollout restart -n default
