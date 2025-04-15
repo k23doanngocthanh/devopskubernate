@@ -61,6 +61,6 @@ jobs:
           kubectl apply -f k8s_config/services/mysql/ -n default
           kubectl apply -f k8s_config/services/phpmyadmin/ -n default
           kubectl apply -f k8s_config/ingress/ -n default
-          kubectl apply -f k8s_config/metallb/l2advertisement.yaml -n
+          kubectl apply -f k8s_config/metallb/l2advertisement.yaml
           kubectl rollout restart deployment --all -n default
 
