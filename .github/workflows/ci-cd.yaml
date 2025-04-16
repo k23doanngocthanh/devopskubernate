@@ -59,7 +59,7 @@ jobs:
         kubectl apply -f k8s_config/services/mysql/ -n default
         kubectl apply -f k8s_config/services/phpmyadmin/ -n default
         kubectl apply -f k8s_config/ingress/ -n default
-        kubectl apply -f k8s_config/metallb/l2advertisement.yaml
+     
 
     - name: Restart all deployments in default namespace
       run: |
